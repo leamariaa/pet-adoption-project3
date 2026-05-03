@@ -3,22 +3,68 @@
 
 <main>
   <h2>User Dashboard</h2>
+
   <p>Welcome, <%= currentUser.username %>.</p>
 
-  <h3>Your Adopted Pets</h3>
+  <h3>Your Adopted Pet</h3>
 
   <% if (currentUser.adoptedPets.length === 0) { %>
+
     <p>You have not adopted any pet yet.</p>
-    <a class="btn" href="/pets?status=available">Browse Available Pets</a>
+
+    <a class="btn" href="/pets">
+      Browse Available Pets
+    </a>
+
   <% } else { %>
-    <ul>
+
+    <div class="grid">
+
       <% currentUser.adoptedPets.forEach(pet => { %>
-        <li>
-          <a href="/pets/<%= pet._id %>"><%= pet.name %></a>
-        </li>
+
+        <div class="card pet-card">
+
+          <img 
+            src="<%= pet.image %>" 
+            alt="<%= pet.name %>" 
+            class="pet-image"
+          >
+
+          <h3><%= pet.name %></h3>
+
+          <p>
+            <strong>Type:</strong>
+            <%= pet.type %>
+          </p>
+
+          <p>
+            <strong>Age:</strong>
+            <%= pet.age %>
+          </p>
+
+          <p>
+            <strong>Status:</strong>
+            <span class="status adopted">Adopted</span>
+          </p>
+
+          <% if (pet.categories && pet.categories.length > 0) { %>
+            <div class="categories">
+              <% pet.categories.forEach(category => { %>
+                <span class="category-badge">
+                  <%= category.name %>
+                </span>
+              <% }) %>
+            </div>
+          <% } %>
+
+        </div>
+
       <% }) %>
-    </ul>
+
+    </div>
+
   <% } %>
+
 </main>
 
 <%- include('../partials/footer') %>

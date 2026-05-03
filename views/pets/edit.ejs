@@ -8,7 +8,11 @@
     <p class="error"><%= error %></p>
   <% } %>
 
-  <form action="/pets/<%= pet._id %>/edit" method="POST" enctype="multipart/form-data">
+  <form 
+    action="/pets/<%= pet._id %>/edit" 
+    method="POST" 
+    enctype="multipart/form-data"
+  >
     <label>Name</label>
     <input type="text" name="name" value="<%= pet.name %>" required>
 
@@ -19,10 +23,22 @@
     <input type="text" name="type" value="<%= pet.type %>" required>
 
     <label>Current Image</label>
-    <img src="<%= pet.image %>" alt="<%= pet.name %>" class="pet-image-preview">
 
-    <label>Change Image</label>
+    <img 
+      src="<%= pet.image %>" 
+      alt="<%= pet.name %>" 
+      class="pet-image-preview"
+    >
+
+    <label>Upload New Image</label>
     <input type="file" name="image" accept="image/*">
+
+    <label>Or New Image URL</label>
+    <input 
+      type="text" 
+      name="imageUrl" 
+      placeholder="https://example.com/pet.jpg"
+    >
 
     <label class="checkbox-group">
       <input type="checkbox" name="adopted" <%= pet.adopted ? 'checked' : '' %>>

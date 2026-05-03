@@ -16,10 +16,17 @@ exports.dashboard = async (req, res) => {
     });
   }
 
-  const user = await User.findById(req.user.id).populate('adoptedPets');
+  const currentUser = await User.findById(req.user.id)
+    .populate({
+      path: 'adoptedPets',
+      populate: [
+        { path: 'categories' },
+        { path: 'medicalRecord' }
+      ]
+    });
 
   res.render('dashboard/user', {
     title: 'User Dashboard',
-    currentUser: user
+    currentUser
   });
 };

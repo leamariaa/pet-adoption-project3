@@ -66,11 +66,15 @@ exports.showCreateForm = async (req, res) => {
 
 exports.createPet = async (req, res) => {
   try {
-    const { name, age, type, categories } = req.body;
+    const { name, age, type, imageUrl, categories } = req.body;
 
-    const imagePath = req.file
-      ? '/uploads/' + req.file.filename
-      : '/images/default-pet.jpg';
+    let imagePath = '/images/default-pet.jpg';
+
+    if (req.file) {
+      imagePath = '/uploads/' + req.file.filename;
+    } else if (imageUrl && imageUrl.trim() !== '') {
+      imagePath = imageUrl.trim();
+    }
 
     const pet = await Pet.create({
       name,
@@ -123,7 +127,14 @@ exports.showEditForm = async (req, res) => {
 
 exports.updatePet = async (req, res) => {
   try {
-    const { name, age, type, adopted, categories } = req.body;
+    const {
+      name,
+      age,
+      type,
+      adopted,
+      imageUrl,
+      categories
+    } = req.body;
 
     const categoryIds = categories
       ? Array.isArray(categories)
@@ -141,6 +152,8 @@ exports.updatePet = async (req, res) => {
 
     if (req.file) {
       updateData.image = '/uploads/' + req.file.filename;
+    } else if (imageUrl && imageUrl.trim() !== '') {
+      updateData.image = imageUrl.trim();
     }
 
     const pet = await Pet.findByIdAndUpdate(
