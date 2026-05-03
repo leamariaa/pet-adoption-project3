@@ -1,0 +1,138 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+
+  <h2>Pets</h2>
+
+  <!-- FILTER BUTTONS -->
+
+  <div class="filter-buttons">
+
+    <a href="/pets" class="filter-btn">
+      All
+    </a>
+
+    <a href="/pets?status=available" class="filter-btn">
+      Available
+    </a>
+
+    <a href="/pets?status=adopted" class="filter-btn">
+      Adopted
+    </a>
+
+  </div>
+
+  <!-- ADMIN BUTTON -->
+
+  <% if (user && user.role === 'admin') { %>
+
+    <a class="btn add-btn" href="/pets/create">
+      Add New Pet
+    </a>
+
+  <% } %>
+
+  <!-- PETS GRID -->
+
+  <div class="grid">
+
+    <% pets.forEach(pet => { %>
+
+      <div class="card pet-card">
+
+        <h3><%= pet.name %></h3>
+
+        <p>
+          <strong>Type:</strong>
+          <%= pet.type %>
+        </p>
+
+        <p>
+          <strong>Age:</strong>
+          <%= pet.age %>
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+
+          <% if (pet.adopted) { %>
+
+            <span class="status adopted">
+              Adopted
+            </span>
+
+          <% } else { %>
+
+            <span class="status available">
+              Available
+            </span>
+
+          <% } %>
+
+        </p>
+
+        <!-- CATEGORIES -->
+
+        <% if (pet.categories && pet.categories.length > 0) { %>
+
+          <div class="categories">
+
+            <% pet.categories.forEach(category => { %>
+
+              <span class="category-badge">
+                <%= category.name %>
+              </span>
+
+            <% }) %>
+
+          </div>
+
+        <% } %>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="pet-actions">
+
+          <a 
+            href="/pets/<%= pet._id %>"
+            class="action-btn details-btn"
+          >
+            View Details
+          </a>
+
+          <% if (user && user.role === 'admin') { %>
+
+            <a 
+              href="/pets/<%= pet._id %>/edit"
+              class="action-btn edit-btn"
+            >
+              Edit
+            </a>
+
+            <form 
+              action="/pets/<%= pet._id %>/delete"
+              method="POST"
+              class="inline-form"
+            >
+              <button 
+                type="submit"
+                class="action-btn delete-btn"
+              >
+                Delete
+              </button>
+            </form>
+
+          <% } %>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>Admin Dashboard</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Pets</h3>
+      <p><%= petsCount %></p>
+    </div>
+
+    <div class="card">
+      <h3>Users</h3>
+      <p><%= usersCount %></p>
+    </div>
+
+    <div class="card">
+      <h3>Categories</h3>
+      <p><%= categoriesCount %></p>
+    </div>
+  </div>
+
+  <a class="btn" href="/pets/create">Add Pet</a>
+  <a class="btn" href="/categories/create">Add Category</a>
+  <a class="btn" href="/medical-records/create">Add Medical Record</a>
+</main>
+
+<%- include('../partials/footer') %>

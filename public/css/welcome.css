@@ -1,0 +1,127 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  background-image: url("/images/main-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-box {
+  background: rgba(255,255,255,0.85);
+
+  padding: 50px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.welcome-box h1 {
+  margin-bottom: 15px;
+}
+
+.welcome-buttons {
+  margin-top: 30px;
+
+  display: flex;
+
+  gap: 20px;
+
+  justify-content: center;
+}
+
+.welcome-btn {
+  background: #2563eb;
+
+  color: white;
+
+  padding: 12px 24px;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  transition: 0.2s;
+}
+
+.welcome-btn:hover {
+  opacity: 0.9;
+}
+
+.pet-3d {
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  animation: floatPet 3s ease-in-out infinite;
+}
+
+.pet-3d img {
+  width: 260px;
+  filter: drop-shadow(0 15px 20px rgba(0,0,0,0.3));
+}
+
+@keyframes floatPet {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(3deg) scale(1.03);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+/* ROTATING LOGO */
+
+.logo-rotate-container {
+  position: absolute;
+
+  bottom: 40px;
+  left: 60px;
+
+  perspective: 1000px;
+}
+
+#rotatingLogo {
+  width: 140px;
+
+  cursor: grab;
+
+  user-select: none;
+
+  transition: transform 0.1s linear;
+
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
+}
+
+#rotatingLogo:active {
+  cursor: grabbing;
+}

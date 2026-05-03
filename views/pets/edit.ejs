@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>Edit Pet</h2>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/pets/<%= pet._id %>/edit" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" value="<%= pet.name %>" required>
+
+    <label>Age</label>
+    <input type="number" name="age" value="<%= pet.age %>" min="0" required>
+
+    <label>Type</label>
+    <input type="text" name="type" value="<%= pet.type %>" required>
+
+    <label class="checkbox">
+      <input type="checkbox" name="adopted" <%= pet.adopted ? 'checked' : '' %>>
+      Adopted
+    </label>
+
+    <label>Categories</label>
+    <% categories.forEach(category => { %>
+      <label class="checkbox">
+        <input 
+          type="checkbox" 
+          name="categories" 
+          value="<%= category._id %>"
+          <%= pet.categories.map(id => id.toString()).includes(category._id.toString()) ? 'checked' : '' %>
+        >
+        <%= category.name %>
+      </label>
+    <% }) %>
+
+    <button type="submit">Update Pet</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>User Dashboard</h2>
+  <p>Welcome, <%= currentUser.username %>.</p>
+
+  <h3>Your Adopted Pets</h3>
+
+  <% if (currentUser.adoptedPets.length === 0) { %>
+    <p>You have not adopted any pet yet.</p>
+    <a class="btn" href="/pets?status=available">Browse Available Pets</a>
+  <% } else { %>
+    <ul>
+      <% currentUser.adoptedPets.forEach(pet => { %>
+        <li>
+          <a href="/pets/<%= pet._id %>"><%= pet.name %></a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>Add Category</h2>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/categories/create" method="POST">
+    <label>Category Name</label>
+    <input type="text" name="name" required>
+
+    <button type="submit">Create Category</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

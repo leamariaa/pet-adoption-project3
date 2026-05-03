@@ -1,0 +1,34 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>Edit Medical Record for <%= record.pet.name %></h2>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/medical-records/<%= record._id %>/edit" method="POST">
+    <label class="checkbox">
+      <input type="checkbox" name="vaccinated" <%= record.vaccinated ? 'checked' : '' %>>
+      Vaccinated
+    </label>
+
+    <label>Health Status</label>
+    <select name="healthStatus">
+      <option value="Healthy" <%= record.healthStatus === 'Healthy' ? 'selected' : '' %>>Healthy</option>
+      <option value="Needs Treatment" <%= record.healthStatus === 'Needs Treatment' ? 'selected' : '' %>>Needs Treatment</option>
+      <option value="Under Observation" <%= record.healthStatus === 'Under Observation' ? 'selected' : '' %>>Under Observation</option>
+    </select>
+
+    <label>Last Checkup Date</label>
+    <input type="date" name="lastCheckupDate" value="<%= record.lastCheckupDate ? record.lastCheckupDate.toISOString().substring(0,10) : '' %>">
+
+    <label>Notes</label>
+    <textarea name="notes"><%= record.notes %></textarea>
+
+    <button type="submit">Update Record</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

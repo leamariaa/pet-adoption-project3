@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2>Add Medical Record</h2>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/medical-records/create" method="POST">
+    <label>Pet</label>
+    <select name="pet" required>
+      <% pets.forEach(pet => { %>
+        <option value="<%= pet._id %>"><%= pet.name %></option>
+      <% }) %>
+    </select>
+
+    <label class="checkbox">
+      <input type="checkbox" name="vaccinated">
+      Vaccinated
+    </label>
+
+    <label>Health Status</label>
+    <select name="healthStatus">
+      <option value="Healthy">Healthy</option>
+      <option value="Needs Treatment">Needs Treatment</option>
+      <option value="Under Observation">Under Observation</option>
+    </select>
+
+    <label>Last Checkup Date</label>
+    <input type="date" name="lastCheckupDate">
+
+    <label>Notes</label>
+    <textarea name="notes"></textarea>
+
+    <button type="submit">Create Record</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

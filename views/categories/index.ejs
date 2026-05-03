@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+
+  <h2>Categories</h2>
+
+  <% if (user && user.role === 'admin') { %>
+    <a class="btn add-btn" href="/categories/create">
+      Add Category
+    </a>
+  <% } %>
+
+  <div class="grid">
+
+    <% categories.forEach(category => { %>
+
+      <div class="card">
+
+        <h3><%= category.name %></h3>
+
+        <p>
+          <strong>Number of Pets:</strong>
+          <%= category.pets ? category.pets.length : 0 %>
+        </p>
+
+        <% if (category.pets && category.pets.length > 0) { %>
+          <h4>Pets in this category:</h4>
+
+          <ul>
+            <% category.pets.forEach(pet => { %>
+              <li><%= pet.name %></li>
+            <% }) %>
+          </ul>
+        <% } %>
+
+        <% if (user && user.role === 'admin') { %>
+
+          <div class="pet-actions">
+
+            <a 
+              href="/categories/<%= category._id %>/edit"
+              class="action-btn edit-btn"
+            >
+              Edit
+            </a>
+
+            <form 
+              action="/categories/<%= category._id %>/delete"
+              method="POST"
+              class="inline-form"
+            >
+              <button 
+                type="submit"
+                class="action-btn delete-btn"
+              >
+                Delete
+              </button>
+            </form>
+
+          </div>
+
+        <% } %>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</main>
+
+<%- include('../partials/footer') %>

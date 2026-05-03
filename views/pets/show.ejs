@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<main>
+  <h2><%= pet.name %></h2>
+
+  <p><strong>Type:</strong> <%= pet.type %></p>
+  <p><strong>Age:</strong> <%= pet.age %></p>
+  <p><strong>Status:</strong> <%= pet.adopted ? 'Adopted' : 'Available' %></p>
+
+  <% if (pet.adoptedBy) { %>
+    <p><strong>Adopted By:</strong> <%= pet.adoptedBy.username %></p>
+  <% } %>
+
+  <h3>Categories</h3>
+  <% if (pet.categories.length === 0) { %>
+    <p>No categories.</p>
+  <% } else { %>
+    <ul>
+      <% pet.categories.forEach(category => { %>
+        <li><%= category.name %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <h3>Medical Record</h3>
+  <% if (pet.medicalRecord) { %>
+    <p>Vaccinated: <%= pet.medicalRecord.vaccinated ? 'Yes' : 'No' %></p>
+    <p>Health Status: <%= pet.medicalRecord.healthStatus %></p>
+    <p>Notes: <%= pet.medicalRecord.notes %></p>
+
+    <% if (user && user.role === 'admin') { %>
+      <a href="/medical-records/<%= pet.medicalRecord._id %>/edit">Edit Medical Record</a>
+      <form action="/medical-records/<%= pet.medicalRecord._id %>/delete" method="POST" class="inline-form">
+        <button type="submit">Delete Medical Record</button>
+      </form>
+    <% } %>
+  <% } else { %>
+    <p>No medical record.</p>
+  <% } %>
+
+  <% if (user && user.role === 'user' && !pet.adopted) { %>
+    <form action="/pets/<%= pet._id %>/adopt" method="POST">
+      <button type="submit">Adopt This Pet</button>
+    </form>
+  <% } %>
+
+  <% if (user && user.role === 'admin') { %>
+    <a class="btn" href="/pets/<%= pet._id %>/edit">Edit Pet</a>
+  <% } %>
+</main>
+
+<%- include('../partials/footer') %>

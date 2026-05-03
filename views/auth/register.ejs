@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card signup-card">
+    <h1>Sign up</h1>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form action="/register" method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+
+      <input type="email" name="email" placeholder="Email" required>
+
+      <input type="password" name="password" placeholder="Password" required>
+
+      <div class="role-row">
+        <label>Role</label>
+        <select name="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <button type="submit">sign up</button>
+
+        <p class="small-text">
+          already have an account?
+          <a href="/login">sign in</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

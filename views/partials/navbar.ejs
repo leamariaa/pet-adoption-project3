@@ -1,0 +1,26 @@
+<header>
+  <h1>Pet Adoption System</h1>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/pets">Pets</a>
+    <a href="/categories">Categories</a>
+
+    <% if (user) { %>
+      <a href="/dashboard">Dashboard</a>
+
+      <% if (user.role === 'admin') { %>
+        <a href="/pets/create">Add Pet</a>
+        <a href="/categories/create">Add Category</a>
+        <a href="/medical-records/create">Add Medical Record</a>
+      <% } %>
+
+      <form action="/logout" method="POST" class="inline-form">
+        <button type="submit">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } %>
+  </nav>
+</header>
