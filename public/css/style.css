@@ -407,3 +407,10 @@ input[type="checkbox"] {
   background: #2563eb;
   color: white;
 }
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}

@@ -7,7 +7,11 @@
   <p><strong>Type:</strong> <%= pet.type %></p>
   <p><strong>Age:</strong> <%= pet.age %></p>
   <p><strong>Status:</strong> <%= pet.adopted ? 'Adopted' : 'Available' %></p>
-
+ 
+  <% if (typeof error !== 'undefined' && error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+  
   <% if (pet.adoptedBy) { %>
     <p><strong>Adopted By:</strong> <%= pet.adoptedBy.username %></p>
   <% } %>

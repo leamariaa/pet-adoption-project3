@@ -128,27 +128,44 @@ exports.deletePet = async (req, res) => {
 };
 
 exports.adoptPet = async (req, res) => {
-  const userId = req.user.id;
+  try {
+    const userId = req.user.id;
 
-  const user = await User.findById(userId);
-  const pet = await Pet.findById(req.params.id);
+    const user = await User.findById(userId);
+    const pet = await Pet.findById(req.params.id);
 
-  if (!pet) return res.status(404).render('404', { title: 'Pet Not Found' });
+    if (!pet) {
+      return res.status(404).render('404', {
+        title: 'Pet Not Found'
+      });
+    }
 
-  if (pet.adopted) {
-    return res.redirect(`/pets/${pet._id}`);
+    if (pet.adopted) {
+      return res.render('pets/show', {
+        title: pet.name,
+        pet,
+        error: 'This pet is already adopted.'
+      });
+    }
+
+    if (user.adoptedPets.length > 0) {
+      return res.render('pets/show', {
+        title: pet.name,
+        pet,
+        error: 'You can only adopt one pet.'
+      });
+    }
+
+    pet.adopted = true;
+    pet.adoptedBy = userId;
+    await pet.save();
+
+    user.adoptedPets.push(pet._id);
+    await user.save();
+
+    res.redirect('/dashboard');
+
+  } catch (err) {
+    res.send(err.message);
   }
-
-  if (user.adoptedPets.length > 0) {
-    return res.redirect('/dashboard');
-  }
-
-  pet.adopted = true;
-  pet.adoptedBy = userId;
-  await pet.save();
-
-  user.adoptedPets.push(pet._id);
-  await user.save();
-
-  res.redirect('/dashboard');
 };
