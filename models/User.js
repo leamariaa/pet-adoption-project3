@@ -29,7 +29,21 @@ const userSchema = new mongoose.Schema({
 
   adoptedPets: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'Pet' }
-  ]
+  ],
+
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+
+  verificationToken: {
+    type: String
+  },
+
+  verificationTokenExpires: {
+    type: Date
+  }
+  
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

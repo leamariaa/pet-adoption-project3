@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resend Verification</title>
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  <div class="auth-background">
+
+    <div class="auth-card">
+
+      <h1>Verify Email</h1>
+
+      <% if (error) { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+
+      <% if (success) { %>
+        <p class="success"><%= success %></p>
+      <% } %>
+
+      <form action="/resend-verification" method="POST">
+
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Enter your email" 
+          required
+        >
+
+        <div class="form-row">
+
+          <button type="submit">
+            Resend Link
+          </button>
+
+          <a href="/login" class="small-link">
+            Back to login
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
