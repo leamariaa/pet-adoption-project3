@@ -37,12 +37,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use('/', require('./routes/authRoutes'));
-app.use('/dashboard', require('./routes/dashboardRoutes'));
-app.use('/pets', require('./routes/petRoutes'));
-app.use('/categories', require('./routes/categoryRoutes'));
-app.use('/medical-records', require('./routes/medicalRecordRoutes'));
+app.use('/dashboard', auth, require('./routes/dashboardRoutes'));
+app.use('/pets', auth, require('./routes/petRoutes'));
+app.use('/categories', auth, require('./routes/categoryRoutes'));
+app.use('/medical-records', auth, require('./routes/medicalRecordRoutes'));
 
 
 app.get('/', (req, res) => {

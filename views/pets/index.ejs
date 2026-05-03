@@ -6,6 +6,7 @@
   <h2>Pets</h2>
 
   <!-- FILTER BUTTONS -->
+<% if (user && user.role === 'admin') { %>
 
   <div class="filter-buttons">
 
@@ -22,7 +23,7 @@
     </a>
 
   </div>
-
+<% } %>
   <!-- ADMIN BUTTON -->
 
   <% if (user && user.role === 'admin') { %>
