@@ -1,27 +1,32 @@
 const mongoose = require('mongoose');
 
 const petSchema = new mongoose.Schema({
-  name: { 
-    type: String, 
+  name: {
+    type: String,
     required: true,
     trim: true
   },
 
-  age: { 
-    type: Number, 
+  age: {
+    type: Number,
     required: true,
     min: 0
   },
 
-  type: { 
-    type: String, 
+  type: {
+    type: String,
     required: true,
     trim: true
   },
 
-  adopted: { 
-    type: Boolean, 
-    default: false 
+  image: {
+    type: String,
+    default: '/images/default-pet.jpg'
+  },
+
+  adopted: {
+    type: Boolean,
+    default: false
   },
 
   adoptedBy: {
@@ -42,6 +47,7 @@ const petSchema = new mongoose.Schema({
     ref: 'MedicalRecord',
     default: null
   }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Pet', petSchema);

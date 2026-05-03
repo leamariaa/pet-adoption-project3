@@ -8,7 +8,7 @@
     <p class="error"><%= error %></p>
   <% } %>
 
-  <form action="/pets/create" method="POST">
+  <form action="/pets/create" method="POST" enctype="multipart/form-data">
     <label>Name</label>
     <input type="text" name="name" required>
 
@@ -18,9 +18,13 @@
     <label>Type</label>
     <input type="text" name="type" placeholder="Dog, Cat, Bird..." required>
 
+    <label>Pet Image</label>
+    <input type="file" name="image" accept="image/*">
+
     <label>Categories</label>
+
     <% categories.forEach(category => { %>
-      <label class="checkbox">
+      <label class="checkbox-group">
         <input type="checkbox" name="categories" value="<%= category._id %>">
         <%= category.name %>
       </label>

@@ -41,6 +41,12 @@
     <% pets.forEach(pet => { %>
 
       <div class="card pet-card">
+        
+        <img 
+          src="<%= pet.image %>" 
+          alt="<%= pet.name %>" 
+          class="pet-image"
+        >
 
         <h3><%= pet.name %></h3>
 

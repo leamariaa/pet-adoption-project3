@@ -68,10 +68,15 @@ exports.createPet = async (req, res) => {
   try {
     const { name, age, type, categories } = req.body;
 
+    const imagePath = req.file
+      ? '/uploads/' + req.file.filename
+      : '/images/default-pet.jpg';
+
     const pet = await Pet.create({
       name,
       age,
       type,
+      image: imagePath,
       categories: categories || []
     });
 
@@ -126,15 +131,21 @@ exports.updatePet = async (req, res) => {
         : [categories]
       : [];
 
+    const updateData = {
+      name,
+      age,
+      type,
+      adopted: adopted === 'on',
+      categories: categoryIds
+    };
+
+    if (req.file) {
+      updateData.image = '/uploads/' + req.file.filename;
+    }
+
     const pet = await Pet.findByIdAndUpdate(
       req.params.id,
-      {
-        name,
-        age,
-        type,
-        adopted: adopted === 'on',
-        categories: categoryIds
-      },
+      updateData,
       {
         new: true,
         runValidators: true

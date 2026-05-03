@@ -37,6 +37,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/', require('./routes/authRoutes'));
+
 app.use('/dashboard', auth, require('./routes/dashboardRoutes'));
 app.use('/pets', auth, require('./routes/petRoutes'));
 app.use('/categories', auth, require('./routes/categoryRoutes'));

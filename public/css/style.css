@@ -414,3 +414,27 @@ input[type="checkbox"] {
   border-radius: 6px;
   margin-bottom: 15px;
 }
+.pet-image {
+  width: 100%;
+
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  display: block;
+
+  margin-bottom: 15px;
+}
+
+.pet-card {
+  overflow: hidden;
+}
+.pet-image-preview {
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
